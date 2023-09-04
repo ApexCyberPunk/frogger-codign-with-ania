@@ -3,10 +3,14 @@ const timeLeftDisplay = document.querySelector('#time-left')
 const resultDisplay = document.querySelector('#result')
 const StartPauseButton = document.querySelector('#start-pause-button')
 const squares = document.querySelectorAll('.grid div')
-const logleft = document.querySelectorAll('.log-left')
+const logsLeft = document.querySelectorAll('.log-left')
+const logsRight = document.querySelectorAll('.log-right')
+const carsLeft = document.querySelectorAll('.car-left')
+const carsRight = document.querySelectorAll('.car-right')
 let currentIndex = 76
 console.log(resultDisplay)
 const width = 9
+let timerId 
 
 function moveFrog(e) {
     // console.log('moved')
@@ -36,8 +40,11 @@ switch(e.key) {
 
 document.addEventListener('keyup', moveFrog)
 
-function autoMoveLogs() {
-    logleft.forEach(logLeft => moveLogLeft(logLeft))
+function autoMoveElements() {
+    logsLeft.forEach(logLeft => moveLogLeft(logLeft))
+    logsRight.forEach(logRight => moveLogRight(logRight))
+    carsLeft.forEach(carLeft => moveCarLeft(carLeft))
+    carsRight.forEach(carRight => moveCarRight(carRight))
 }
 
 function moveLogLeft(logLeft) {
@@ -65,15 +72,77 @@ function moveLogLeft(logLeft) {
     }
 }
 
+function moveLogRight(logRight) {
+    switch(true) {
+        case logRight.classList.contains('l1') :
+            logRight.classList.remove('l1')
+            logRight.classList.add('l5')
+            break
+            case logRight.classList.contains('l2') :
+                logRight.classList.remove('l2')
+                logRight.classList.add('l1')
+                break
+                case logRight.classList.contains('l3') :
+                    logRight.classList.remove('l3')
+                    logRight.classList.add('l2')
+                    break
+                    case logRight.classList.contains('l4') :
+                        logRight.classList.remove('l4')
+                        logRight.classList.add('l3')
+                        break
+                        case logRight.classList.contains('l5') :
+                            logRight.classList.remove('l5')
+                            logRight.classList.add('l4')
+                            break
+    }
+}
 
-setInterval(autoMoveLogs, 1000)
+function moveCarLeft(carLeft) {
+    switch(true) {
+        case carLeft.classList.contains('c1') :
+            carLeft.classList.remove('c1')
+            carLeft.classList.add('c2')
+            break
+            case carLeft.classList.contains('c2') :
+                carLeft.classList.remove('c2')
+                carLeft.classList.add('c3')
+                break
+                case carLeft.classList.contains('c3') :
+                    carLeft.classList.remove('c3')
+                    carLeft.classList.add('c1')
+                    break
+    }
+}
+
+function moveCarRight(carRight) {
+    switch(true) {
+        case carRight.classList.contains('c1') :
+            carRight.classList.remove('c1')
+            carRight.classList.add('c3')
+            break
+            case carRight.classList.contains('c2') :
+                carRight.classList.remove('c2')
+                carRight.classList.add('c1')
+                break
+                case carRight.classList.contains('c3') :
+                    carRight.classList.remove('c3')
+                    carRight.classList.add('c2')
+                    break
+    }
+}
 
 
 
 
+function lose() {
+    if (squares[currentIndex].classList.contains('c1')) {
+        resultDisplay.textContent = "Game over Loser!!!"
+        clearInterval(timerId)
+    }
+}
 
 
-
+timerId = setInterval(autoMoveElements, 1000)
 
 
 

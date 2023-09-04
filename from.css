@@ -24,13 +24,11 @@
     background-color: lightblue;
 } */
 
-.car-left, .car-right {
+/* .car-left, .car-right {
     background-color: lightslategrey;
-}
+} */
 
-.frog {
-    background-color: teal;
-}
+
 
 .l1, .l2, .l3 {
     background-color: brown;
@@ -40,3 +38,12 @@
     background-color: lightblue;
 }
 
+.c1 {
+    background-color: black;
+}
+.c2, .c3 {
+ background-color: lightslategrey;
+}
+.frog {
+    background-color: green;
+}
